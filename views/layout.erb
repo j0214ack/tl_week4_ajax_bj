@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlackJack Sinatra</title>
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/application.css">
+  </head>
+  <body style="padding-top: 50px;">
+    <div class="navbar navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-inner">
+          <ul class="nav">
+            <li><a href="/">Lobby</a></li>
+            <li><a href="/player/new">New Player</a></li>
+            <% if session['player'] %>
+            <li><a href="#"><%= session['player'].name %></a></li>
+            <li><a href="#">Money: <%= session['player'].money %>$</a></li>
+            <li><a href="#">bets: <%= session['player'].bets || 0 %></a></li>
+            <% end %>
+            <% if @deck %>
+              <li><a href="#">Cards remaining in deck: <%= @deck.size %></a></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <% if @error %>
+        <div class="alert alert-error"><%=@error%></div>
+      <% end %>
+        <%= yield %>
+    </div>
+  </body>
+</html>

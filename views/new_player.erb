@@ -1,0 +1,8 @@
+<p> Hello, player! </p>
+<form action="/player/new" method="post">
+  <span>Name:</span> <br>
+  <input type="text" name="player_name" value="<%=@name%>"> <br>
+  <span>Money:</span> <br>
+  <%= erb(:"partials/input_with_error", locals: { type: "text", name: "player_money" }) %>
+  <button class="btn" type="submit">submit</button>
+</form>
