@@ -6,9 +6,9 @@ require_relative 'lib/player'
 require_relative 'lib/deck_and_card'
 require_relative 'lib/dealer'
 
-use Rack::Session::Cookie :key => 'rack.session',
-                          :path => '/',
-                          :secret => 'aaabbc_tlbj'
+use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :secret => 'aaabbc_tlbj'
 
 helpers do
   def check_player
@@ -240,11 +240,11 @@ post '/game' do
   elsif params['turn'] == "dealer_turn"
     dealer_turn
   else
-    redirect '/game'
+    redirect '/game' unless request.xhr?
   end
   session['deck'] = @deck.to_cookie
 
-  erb :game
+  erb :game, :layout => !request.xhr?
 end
 
 get '/game/bets' do
